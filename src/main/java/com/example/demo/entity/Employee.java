@@ -1,7 +1,6 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.PrimaryKeyJoinColumn;
+import jakarta.persistence.*;
 
 @Entity
 @PrimaryKeyJoinColumn(name = "id")
@@ -10,10 +9,15 @@ public class Employee extends Member {
     private String department;
     private Double salary;
     private Double bonus;
-    private String role;
+
+    @Enumerated(EnumType.STRING) // Lưu role dưới dạng chuỗi (STRING) trong database
+    @Column(nullable = false)
+    private EmployeeRole role;
 
     public Employee() {
     }
+
+
 
     public String getPosition() {
         return position;
@@ -23,13 +27,8 @@ public class Employee extends Member {
         this.position = position;
     }
 
-    public String getRole() {
-        return role;
-    }
 
-    public void setRole(String role) {
-        this.role = role;
-    }
+
 
     public Double getBonus() {
         return bonus;
@@ -45,6 +44,14 @@ public class Employee extends Member {
 
     public void setSalary(Double salary) {
         this.salary = salary;
+    }
+
+    public EmployeeRole getRole() {
+        return role;
+    }
+
+    public void setRole(EmployeeRole role) {
+        this.role = role;
     }
 
     public String getDepartment() {
