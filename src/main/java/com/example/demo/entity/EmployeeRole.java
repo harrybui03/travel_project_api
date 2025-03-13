@@ -5,5 +5,6 @@ public enum EmployeeRole {
     MANAGER,     // Quản lý
     ACCOUNTANT,  // Kế toán
     SALES,       // Nhân viên kinh doanh
-    SUPPORT      // Hỗ trợ khách hàng
+    SUPPORT ,   // Hỗ trợ khách hàng
+    TOURGUIDE // hướng dẫn viên
 }
