@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import com.example.demo.entity.enums.EmployeeRole;
 import jakarta.persistence.*;
 
 @Entity
@@ -17,6 +18,9 @@ public class Employee extends Member {
     public Employee() {
     }
 
+    public Employee(Long i, String johnDoe, String tourGuide) {
+
+    }
 
 
     public String getPosition() {
