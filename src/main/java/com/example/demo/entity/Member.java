@@ -2,13 +2,12 @@ package com.example.demo.entity;
 
 import jakarta.persistence.*;
 
-import jakarta.persistence.*;
-
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Member {
+public abstract class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

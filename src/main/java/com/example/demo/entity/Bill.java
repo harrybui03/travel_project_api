@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import com.example.demo.entity.enums.BillType;
 import jakarta.persistence.*;
 
 import java.util.Date;
