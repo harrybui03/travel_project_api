@@ -1,17 +1,13 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.Employee;
-import com.example.demo.entity.enums.EmployeeRole;
 import com.example.demo.service.EmployeeService;
-import com.example.demo.service.Impl.EmployeeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/employees")
