@@ -2,6 +2,9 @@ package com.example.demo.entity;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 public class Tour {
     @Id
@@ -14,6 +17,14 @@ public class Tour {
     private String description;
     private Double price;
     private String tourDuration;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "destination_on_tour",
+            joinColumns = @JoinColumn(name = "tour_id"),
+            inverseJoinColumns = @JoinColumn(name = "destination_id")
+    )
+    private Set<Destination> destinations = new HashSet<>();
 
     public Tour() {
     }
@@ -72,5 +83,13 @@ public class Tour {
 
     public void setTourName(String tourName) {
         this.tourName = tourName;
+    }
+
+    public Set<Destination> getDestinations() {
+        return destinations;
+    }
+
+    public void setDestinations(Set<Destination> destinations) {
+        this.destinations = destinations;
     }
 }

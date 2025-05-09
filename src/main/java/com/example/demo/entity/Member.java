@@ -18,10 +18,19 @@ public abstract class Member {
     private String gender;
     private String address;
     private String email;
+    private String password;
     private String phonenumber;
     private String note;
 
     public Member() {
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Long getId() {

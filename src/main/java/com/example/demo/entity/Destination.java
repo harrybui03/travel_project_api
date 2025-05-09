@@ -2,6 +2,8 @@ package com.example.demo.entity;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Entity
@@ -12,6 +14,9 @@ public class Destination {
 
     private String name;
     private String location;
+
+//    @ManyToMany(mappedBy = "destinations", fetch = FetchType.LAZY)
+//    private Set<Tour> tours = new HashSet<>();
 
     public Destination() {
     }
@@ -39,4 +44,12 @@ public class Destination {
     public void setName(String name) {
         this.name = name;
     }
+
+//    public Set<Tour> getTours() {
+//        return tours;
+//    }
+//
+//    public void setTours(Set<Tour> tours) {
+//        this.tours = tours;
+//    }
 }

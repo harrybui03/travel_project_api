@@ -18,6 +18,10 @@ public class TourSchedule {
     @JoinColumn(name = "tour_id")
     private Tour tour;
 
+    @ManyToOne
+    @JoinColumn(name = "employee_id")
+    private Employee employee;
+
     public TourSchedule() {
     }
 
@@ -51,5 +55,13 @@ public class TourSchedule {
 
     public void setDepartureDate(Date departureDate) {
         this.departureDate = departureDate;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+    public Employee getEmployee(){
+        return this.employee;
     }
 }

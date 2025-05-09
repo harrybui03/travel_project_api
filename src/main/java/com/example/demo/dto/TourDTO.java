@@ -12,6 +12,8 @@ public class TourDTO {
         private String description;
         private Double price;
         private String tourDuration;
+        private DestinationDTO destinationDTO;
+        private Long destination_id;
 
     public TourDTO() {
     }

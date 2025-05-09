@@ -11,7 +11,7 @@ public class Employee extends Member {
     private Double salary;
     private Double bonus;
 
-    @Enumerated(EnumType.STRING) // Lưu role dưới dạng chuỗi (STRING) trong database
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private EmployeeRole role;
 

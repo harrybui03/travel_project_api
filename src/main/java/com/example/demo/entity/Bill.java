@@ -14,7 +14,7 @@ public class Bill {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private BillType billType; // CUSTOMER hoặc PARTNER
+    private BillType billType;
 
     private String paymentMethod;
     private Double paymentAmount;
@@ -22,18 +22,23 @@ public class Bill {
     private Double tax;
     private Double Discount;
     @ManyToOne
-    @JoinColumn(name = "customer_id", nullable = true) // Nullable vì có thể là Partner bill
+    @JoinColumn(name = "customer_id", nullable = true)
     private Customer customer;
 
     @ManyToOne
-    @JoinColumn(name = "employee_id", nullable = false) // Nhân viên kế toán chịu trách nhiệm hóa đơn
-    private Employee employee;
-
-    @ManyToOne
-    @JoinColumn(name = "tour_booking_id", nullable = true) // Chỉ dùng cho hóa đơn khách hàng
+    @JoinColumn(name = "tour_booking_id", nullable = true)
     private TourBooking tourBooking;
 
     public Bill() {
+    }
+
+    public Bill(BillType billType, String paymentMethod, Double paymentAmount, Date paymentDate, Customer customer, TourBooking tourBooking) {
+        this.billType = billType;
+        this.paymentMethod = paymentMethod;
+        this.paymentAmount = paymentAmount;
+        this.paymentDate = paymentDate;
+        this.customer = customer;
+        this.tourBooking = tourBooking;
     }
 
     public Long getId() {
@@ -50,10 +55,6 @@ public class Bill {
 
     public void setTourBooking(TourBooking tourBooking) {
         this.tourBooking = tourBooking;
-    }
-
-    public Employee getEmployee() {
-        return employee;
     }
 
     public BillType getBillType() {
@@ -80,9 +81,6 @@ public class Bill {
         Discount = discount;
     }
 
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
 
     public Customer getCustomer() {
         return customer;

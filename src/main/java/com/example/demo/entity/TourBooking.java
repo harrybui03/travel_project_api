@@ -12,6 +12,12 @@ public class TourBooking {
 
     private Integer numberOfCustomer;
 
+    public TourBooking(Integer numberOfCustomer, TourSchedule tourSchedule, Customer customer) {
+        this.numberOfCustomer = numberOfCustomer;
+        this.tourSchedule = tourSchedule;
+        this.customer = customer;
+    }
+
     @ManyToOne
     @JoinColumn(name = "tour_schedule_id")
     private TourSchedule tourSchedule;
