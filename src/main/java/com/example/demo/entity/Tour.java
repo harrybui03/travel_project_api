@@ -1,8 +1,11 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -27,6 +30,17 @@ public class Tour {
     private Set<Destination> destinations = new HashSet<>();
 
     public Tour() {
+    }
+
+    @OneToMany(mappedBy = "tour", fetch = FetchType.LAZY)
+    private List<TourSchedule> tourSchedules = new ArrayList<>();
+
+    public List<TourSchedule> getTourSchedules() {
+        return tourSchedules;
+    }
+
+    public void setTourSchedules(List<TourSchedule> tourSchedules) {
+        this.tourSchedules = tourSchedules;
     }
 
     public Long getId() {

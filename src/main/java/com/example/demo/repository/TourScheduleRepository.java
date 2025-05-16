@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface TourScheduleRepository extends JpaRepository<TourSchedule, Long> {
 
-    List<TourSchedule> findByEmployee(Employee employee);
+    List<TourSchedule> findByEmployees(Employee employee);
 
     @Query("SELECT ts FROM TourSchedule ts " +
             "WHERE ts.employee = :employee " +

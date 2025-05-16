@@ -1,12 +1,11 @@
 package com.example.demo.mapper;
 
-import com.example.demo.dto.TourDTO;
-import com.example.demo.entity.Tour;
+import com.example.demo.response.Tour;
 
 public class TourMapper {
 
-    public static TourDTO mapToTourDTO(Tour tour) {
-        TourDTO tourDTO = new TourDTO();
+    public static Tour mapToTourDTO(com.example.demo.entity.Tour tour) {
+        Tour tourDTO = new Tour();
         tourDTO.setId(tour.getId());
         tourDTO.setTourName(tour.getTourName());
         tourDTO.setTourDuration(tour.getTourDuration());
@@ -19,8 +18,8 @@ public class TourMapper {
     }
 
 
-    public static  Tour mapToTourEntity(TourDTO tourDTO) {
-        Tour tour = new Tour();
+    public static com.example.demo.entity.Tour mapToTourEntity(Tour tourDTO) {
+        com.example.demo.entity.Tour tour = new com.example.demo.entity.Tour();
         tour.setId(tourDTO.getId());
         tour.setTourName(tourDTO.getTourName());
         tour.setTourDuration(tourDTO.getTourDuration());

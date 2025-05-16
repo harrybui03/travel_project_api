@@ -1,7 +1,7 @@
 package com.example.demo.service;
-import com.example.demo.dto.LoginRequest;
-import com.example.demo.dto.SignupRequest;
-import com.example.demo.dto.TokenResponse;
+import com.example.demo.request.LoginRequest;
+import com.example.demo.request.SignupRequest;
+import com.example.demo.response.TokenResponse;
 
 public interface AuthService {
     TokenResponse signUp(SignupRequest signupRequest);

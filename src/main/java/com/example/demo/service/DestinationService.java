@@ -1,17 +1,17 @@
 package com.example.demo.service;
 
-import com.example.demo.dto.DestinationDTO;
+import com.example.demo.response.Destination;
 import java.util.List;
 
 public interface DestinationService {
 
-    DestinationDTO createDestination(DestinationDTO destinationDTO);
+    Destination createDestination(Destination destination);
 
-    DestinationDTO getDestinationById(Long id);
+    Destination getDestinationById(Long id);
 
-    List<DestinationDTO> getAllDestinations();
+    List<Destination> getAllDestinations();
 
-    DestinationDTO updateDestination(Long id, DestinationDTO destinationDTO);
+    Destination updateDestination(Long id, Destination destination);
 
     void deleteDestination(Long id);
 }

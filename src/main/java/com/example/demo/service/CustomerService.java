@@ -1,16 +1,16 @@
 package com.example.demo.service;
 
-import com.example.demo.dto.CustomerDTO;
+import com.example.demo.response.Customer;
 import java.util.List;
 
 public interface CustomerService {
-    CustomerDTO createCustomer(CustomerDTO customerDTO);
+    Customer createCustomer(Customer customer);
 
-    CustomerDTO getCustomerById(Long id);
+    Customer getCustomerById(Long id);
 
-    List<CustomerDTO> getAllCustomers();
+    List<Customer> getAllCustomers();
 
-    CustomerDTO updateCustomer(Long id, CustomerDTO customerDTO);
+    Customer updateCustomer(Long id, Customer customer);
 
     void deleteCustomer(Long id);
 }

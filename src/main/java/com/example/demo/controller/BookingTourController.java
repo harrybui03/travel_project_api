@@ -1,11 +1,11 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.BillDTO;
-import com.example.demo.dto.CreateTourBookingRequest;
 import com.example.demo.entity.Bill;
 import com.example.demo.entity.Tour;
 import com.example.demo.entity.TourBooking;
 import com.example.demo.entity.TourSchedule;
+import com.example.demo.request.BillRequest;
+import com.example.demo.request.CreateTourBookingRequest;
 import com.example.demo.service.BookingTourService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -55,7 +55,7 @@ public class BookingTourController {
     }
 
     @PostMapping("/{tourBookingId}/bills")
-    public ResponseEntity<Bill> createBill(@PathVariable Long tourBookingId, @RequestBody BillDTO billDTO) {
+    public ResponseEntity<Bill> createBill(@PathVariable Long tourBookingId, @RequestBody BillRequest billDTO) {
         Bill bill = bookingTourService.createBill(tourBookingId, billDTO);
         if (bill != null) {
             return new ResponseEntity<>(bill, HttpStatus.CREATED);

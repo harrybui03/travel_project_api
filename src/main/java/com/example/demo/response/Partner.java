@@ -1,13 +1,13 @@
-package com.example.demo.dto;
+package com.example.demo.response;
 
-public class PartnerDTO {
+public class Partner {
     private Long id;
     private String name;
     private String address;
     private String email;
     private String phoneNumber;
 
-    public PartnerDTO() {
+    public Partner() {
     }
 
     public Long getId() {

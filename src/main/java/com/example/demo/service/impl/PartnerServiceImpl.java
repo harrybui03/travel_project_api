@@ -1,7 +1,6 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.dto.PartnerDTO;
-import com.example.demo.entity.Partner;
+import com.example.demo.response.Partner;
 import com.example.demo.mapper.PartnerMapper;
 import com.example.demo.repository.PartnerRepository;
 import com.example.demo.service.PartnerService;
@@ -18,8 +17,8 @@ public class PartnerServiceImpl implements PartnerService {
 
 
     @Override
-    public List<PartnerDTO> getAllPartners() {
-        List<Partner> partners = partnerRepository.findAll();
+    public List<Partner> getAllPartners() {
+        List<com.example.demo.entity.Partner> partners = partnerRepository.findAll();
         // duyet qua cac phan tu cua partners
         // map partner -> partnerDTO
         // return list<PartnerDTO>
@@ -27,8 +26,8 @@ public class PartnerServiceImpl implements PartnerService {
     }
 
     @Override
-    public PartnerDTO addPartner(PartnerDTO partnerDTO) {
-        Partner partner = PartnerMapper.mapToPartnerEntity(partnerDTO);
+    public Partner addPartner(Partner partnerDTO) {
+        com.example.demo.entity.Partner partner = PartnerMapper.mapToPartnerEntity(partnerDTO);
         partner = partnerRepository.save(partner);
         return PartnerMapper.mapToPartnerDTO(partner);
     }
@@ -42,39 +41,39 @@ public class PartnerServiceImpl implements PartnerService {
     }
 
     @Override
-    public PartnerDTO updatePartner(PartnerDTO partnerDTO) {
+    public Partner updatePartner(Partner partner) {
         // tim partner ton tai trong db qua id
-        Optional<Partner> partnerOptional = partnerRepository.findById(partnerDTO.getId());
+        Optional<com.example.demo.entity.Partner> partnerOptional = partnerRepository.findById(partner.getId());
 
         // cap nhat thong tin partner ( chi cap nhat phan non-null
-        Partner partnerToUpdate = partnerOptional.orElseThrow(
-                () -> new RuntimeException("Partner with id " + partnerDTO.getId() + " does not exist"));
+        com.example.demo.entity.Partner partnerToUpdate = partnerOptional.orElseThrow(
+                () -> new RuntimeException("Partner with id " + partner.getId() + " does not exist"));
 
-        Partner savedPartner = partnerRepository.save(partnerToUpdate);
+        com.example.demo.entity.Partner savedPartner = partnerRepository.save(partnerToUpdate);
         return PartnerMapper.mapToPartnerDTO(savedPartner);
 
     }
 
     @Override
-    public PartnerDTO getPartnerById(Long id) {
-        Partner partner = partnerRepository.findById(id).orElseThrow(
+    public Partner getPartnerById(Long id) {
+        com.example.demo.entity.Partner partner = partnerRepository.findById(id).orElseThrow(
                 () -> new RuntimeException("Partner with id " + id + " does not exist")
         );
         return PartnerMapper.mapToPartnerDTO(partner);
     }
 
-    private void updatePartnerFromDTO(Partner partnerToUpdate, PartnerDTO partnerDTO) {
-        if (partnerDTO.getName()!=null) {
-            partnerToUpdate.setName(partnerDTO.getName());
+    private void updatePartnerFromDTO(com.example.demo.entity.Partner partnerToUpdate, Partner partner) {
+        if (partner.getName()!=null) {
+            partnerToUpdate.setName(partner.getName());
         }
-        if (partnerDTO.getAddress()!=null) {
-            partnerToUpdate.setAddress(partnerDTO.getAddress());
+        if (partner.getAddress()!=null) {
+            partnerToUpdate.setAddress(partner.getAddress());
         }
-        if (partnerDTO.getEmail()!=null) {
-            partnerToUpdate.setEmail(partnerDTO.getEmail());
+        if (partner.getEmail()!=null) {
+            partnerToUpdate.setEmail(partner.getEmail());
         }
-        if(partnerDTO.getPhoneNumber()!=null) {
-            partnerToUpdate.setPhoneNumber(partnerDTO.getPhoneNumber());
+        if(partner.getPhoneNumber()!=null) {
+            partnerToUpdate.setPhoneNumber(partner.getPhoneNumber());
         }
     }
 }

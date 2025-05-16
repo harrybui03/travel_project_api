@@ -1,9 +1,11 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.Date;
-
+import java.util.List;
 
 @Entity
 public class TourSchedule {
@@ -16,11 +18,16 @@ public class TourSchedule {
 
     @ManyToOne
     @JoinColumn(name = "tour_id")
+    @JsonIgnore
     private Tour tour;
 
-    @ManyToOne
-    @JoinColumn(name = "employee_id")
-    private Employee employee;
+    @ManyToMany
+    @JoinTable(
+            name = "tour_schedule_employee",
+            joinColumns = @JoinColumn(name = "tour_schedule_id"),
+            inverseJoinColumns = @JoinColumn(name = "employee_id")
+    )
+    private List<Employee> employees = new ArrayList<>();
 
     public TourSchedule() {
     }
@@ -57,11 +64,11 @@ public class TourSchedule {
         this.departureDate = departureDate;
     }
 
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
+    public List<Employee> getEmployees() {
+        return employees;
     }
 
-    public Employee getEmployee(){
-        return this.employee;
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
     }
 }

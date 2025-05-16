@@ -1,8 +1,8 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.dto.LoginRequest;
-import com.example.demo.dto.SignupRequest;
-import com.example.demo.dto.TokenResponse;
+import com.example.demo.request.LoginRequest;
+import com.example.demo.request.SignupRequest;
+import com.example.demo.response.TokenResponse;
 import com.example.demo.entity.Customer;
 import com.example.demo.exception.AuthenticationFailedException;
 import com.example.demo.exception.EmailAlreadyExistsException;

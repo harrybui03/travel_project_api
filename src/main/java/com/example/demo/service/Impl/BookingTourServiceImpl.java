@@ -1,9 +1,9 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.dto.BillDTO;
-import com.example.demo.dto.CreateTourBookingRequest;
 import com.example.demo.entity.*;
 import com.example.demo.repository.*;
+import com.example.demo.request.BillRequest;
+import com.example.demo.request.CreateTourBookingRequest;
 import com.example.demo.service.BookingTourService;
 import org.springframework.stereotype.Service;
 
@@ -39,7 +39,7 @@ public class BookingTourServiceImpl implements BookingTourService {
     @Override
     public List<TourSchedule> getListTourSchedule(Long tourId) {
         List<TourSchedule> tourSchedules = tourScheduleRepository.findByTour_Id(tourId).stream().filter(tourSchedule -> {
-            return tourSchedule.getEmployee() != null;
+            return tourSchedule.getEmployees() != null;
         }).toList();
         return tourSchedules;
     }
@@ -80,7 +80,7 @@ public class BookingTourServiceImpl implements BookingTourService {
     }
 
     @Override
-    public Bill createBill(Long tourBookingId, BillDTO billDTO) {
+    public Bill createBill(Long tourBookingId, BillRequest billDTO) {
         Optional<TourBooking> tourBooking = tourBookingRepository.findById(tourBookingId);
         if (tourBooking.isEmpty()){
             return null;

@@ -1,8 +1,8 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.TourBookingInfo;
-import com.example.demo.dto.TourScheduleInfo;
-import com.example.demo.dto.TourStat;
+import com.example.demo.response.TourBookingInfo;
+import com.example.demo.response.TourScheduleInfo;
+import com.example.demo.response.TourStat;
 import com.example.demo.service.TourStatisticService;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;

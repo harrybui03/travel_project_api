@@ -1,8 +1,7 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.TourDTO;
-import com.example.demo.service.Impl.TourServiceImpl;
-import com.example.demo.service.TourService;
+import com.example.demo.response.Tour;
+import com.example.demo.service.impl.TourServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,29 +18,29 @@ public class TourController {
     private TourServiceImpl tourService;
 
     @GetMapping("listAll")
-    public ResponseEntity<List<TourDTO>> getAllTours() {
-        List<TourDTO> tours = new ArrayList<>();
+    public ResponseEntity<List<Tour>> getAllTours() {
+        List<Tour> tours = new ArrayList<>();
         tours = tourService.getAllTours();
         return new ResponseEntity<>(tours, HttpStatus.OK);
 
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<TourDTO> getTourById(@PathVariable("id") Long id) {
-        TourDTO tourDTO  = tourService.getTourById(id);
-        return new ResponseEntity<>(tourDTO, HttpStatus.OK);
+    public ResponseEntity<Tour> getTourById(@PathVariable("id") Long id) {
+        Tour tour = tourService.getTourById(id);
+        return new ResponseEntity<>(tour, HttpStatus.OK);
     }
 
     @PostMapping("/addTour")
-    public ResponseEntity<TourDTO> addTour(@RequestBody TourDTO tourDTO) {
-        TourDTO savedTour = tourService.addTour(tourDTO);
+    public ResponseEntity<Tour> addTour(@RequestBody Tour tour) {
+        Tour savedTour = tourService.addTour(tour);
         return new ResponseEntity<>(savedTour, HttpStatus.CREATED);
     }
 
     @PatchMapping("/updateTour/{id}")
-    public ResponseEntity<TourDTO> updateTour(@PathVariable("id") Long id, @RequestBody TourDTO tourDTO) {
-        tourDTO.setId(id);
-        TourDTO updatedTour = tourService.updateTour(tourDTO);
+    public ResponseEntity<Tour> updateTour(@PathVariable("id") Long id, @RequestBody Tour tour) {
+        tour.setId(id);
+        Tour updatedTour = tourService.updateTour(tour);
         return new ResponseEntity<>(updatedTour, HttpStatus.OK);
     }
 

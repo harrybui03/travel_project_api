@@ -1,4 +1,4 @@
-package com.example.demo.dto;
+package com.example.demo.request;
 
 public class SignupRequest {
     private String fullName;

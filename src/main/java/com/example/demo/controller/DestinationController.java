@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.DestinationDTO;
+import com.example.demo.response.Destination;
 import com.example.demo.service.DestinationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,28 +21,28 @@ public class DestinationController {
     }
 
     @PostMapping
-    public ResponseEntity<DestinationDTO> createDestination(@RequestBody DestinationDTO destinationDTO) {
-        DestinationDTO createdDestination = destinationService.createDestination(destinationDTO);
+    public ResponseEntity<Destination> createDestination(@RequestBody Destination destination) {
+        Destination createdDestination = destinationService.createDestination(destination);
         return new ResponseEntity<>(createdDestination, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<DestinationDTO> getDestinationById(@PathVariable Long id) {
-        DestinationDTO destinationDTO = destinationService.getDestinationById(id);
-        return ResponseEntity.ok(destinationDTO);
+    public ResponseEntity<Destination> getDestinationById(@PathVariable Long id) {
+        Destination destination = destinationService.getDestinationById(id);
+        return ResponseEntity.ok(destination);
     }
 
     @GetMapping
-    public ResponseEntity<List<DestinationDTO>> getAllDestinations() {
-        List<DestinationDTO> destinations = destinationService.getAllDestinations();
+    public ResponseEntity<List<Destination>> getAllDestinations() {
+        List<Destination> destinations = destinationService.getAllDestinations();
         return ResponseEntity.ok(destinations);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<DestinationDTO> updateDestination(
+    public ResponseEntity<Destination> updateDestination(
             @PathVariable Long id,
-            @RequestBody DestinationDTO destinationDTO) {
-        DestinationDTO updatedDestination = destinationService.updateDestination(id, destinationDTO);
+            @RequestBody Destination destination) {
+        Destination updatedDestination = destinationService.updateDestination(id, destination);
         return ResponseEntity.ok(updatedDestination);
     }
 

@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.AssignRequest;
+import com.example.demo.entity.Tour;
+import com.example.demo.request.AssignRequest;
 import com.example.demo.entity.Employee;
 import com.example.demo.entity.TourSchedule;
 import com.example.demo.service.AssignService;
@@ -36,8 +37,8 @@ public class AssignTourController {
     }
 
     @PostMapping("/assign-employee")
-    public ResponseEntity<String> assignEmployeeToTour(@RequestBody AssignRequest assignRequest) {
-        boolean assignmentResult = assignService.assignTour(assignRequest.getTourScheduleId(), assignRequest.getEmployeeId());
+    public ResponseEntity<String> assignEmployeeToTour(@RequestBody Tour tour) {
+        boolean assignmentResult = assignService.assignTour(tour);
         if (assignmentResult) {
             return new ResponseEntity<>("Employee assigned to tour successfully.", HttpStatus.OK);
         } else {

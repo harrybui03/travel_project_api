@@ -1,15 +1,13 @@
 package com.example.demo.service;
 
-import com.example.demo.dto.PartnerDTO;
-import com.example.demo.entity.Partner;
-import jakarta.servlet.http.Part;
+import com.example.demo.response.Partner;
 
 import java.util.List;
 
 public interface PartnerService {
-    List<PartnerDTO> getAllPartners();
-    PartnerDTO addPartner(PartnerDTO partnerDTO);
+    List<Partner> getAllPartners();
+    Partner addPartner(Partner partner);
     void deletePartner(Long id);
-    PartnerDTO updatePartner(PartnerDTO partnerDTO);
-    PartnerDTO getPartnerById(Long id);
+    Partner updatePartner(Partner partner);
+    Partner getPartnerById(Long id);
 }

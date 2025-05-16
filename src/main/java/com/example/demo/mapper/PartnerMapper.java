@@ -1,13 +1,12 @@
 package com.example.demo.mapper;
 
-import com.example.demo.dto.PartnerDTO;
-import com.example.demo.entity.Partner;
+import com.example.demo.response.Partner;
 
 public class PartnerMapper {
 
     //map entity to dto
-    public static PartnerDTO mapToPartnerDTO(Partner partner) {
-        PartnerDTO partnerDTO = new PartnerDTO();
+    public static Partner mapToPartnerDTO(com.example.demo.entity.Partner partner) {
+        Partner partnerDTO = new Partner();
         partnerDTO.setId(partner.getId());
         partnerDTO.setName(partner.getName());
         partnerDTO.setAddress(partner.getAddress());
@@ -17,8 +16,8 @@ public class PartnerMapper {
     }
 
     //map dto to entity
-    public static Partner mapToPartnerEntity(PartnerDTO partnerDTO) {
-        Partner partner = new Partner();
+    public static com.example.demo.entity.Partner mapToPartnerEntity(Partner partnerDTO) {
+        com.example.demo.entity.Partner partner = new com.example.demo.entity.Partner();
         partner.setId(partnerDTO.getId());
         partner.setName(partnerDTO.getName());
         partner.setAddress(partnerDTO.getAddress());

@@ -1,7 +1,6 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.dto.CustomerDTO;
-import com.example.demo.entity.Customer;
+import com.example.demo.response.Customer;
 import com.example.demo.mapper.CustomerMapper;
 import com.example.demo.repository.CustomerRepository;
 import com.example.demo.service.CustomerService;
@@ -20,25 +19,25 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public CustomerDTO createCustomer(CustomerDTO customerDTO) {
-        Customer customer = CustomerMapper.toEntity(customerDTO);
+    public Customer createCustomer(Customer customerDTO) {
+        com.example.demo.entity.Customer customer = CustomerMapper.toEntity(customerDTO);
 
-        Customer savedCustomer = customerRepository.save(customer);
+        com.example.demo.entity.Customer savedCustomer = customerRepository.save(customer);
 
         return CustomerMapper.toDTO(savedCustomer);
     }
 
     @Override
-    public CustomerDTO getCustomerById(Long id) {
-        Customer customer = customerRepository.findById(id)
+    public Customer getCustomerById(Long id) {
+        com.example.demo.entity.Customer customer = customerRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Customer not found with id: " + id));
 
         return CustomerMapper.toDTO(customer);
     }
 
     @Override
-    public List<CustomerDTO> getAllCustomers() {
-        List<Customer> customers = customerRepository.findAll();
+    public List<Customer> getAllCustomers() {
+        List<com.example.demo.entity.Customer> customers = customerRepository.findAll();
 
         return customers.stream()
                 .map(CustomerMapper::toDTO)
@@ -46,22 +45,22 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public CustomerDTO updateCustomer(Long id, CustomerDTO customerDTO) {
-        Customer existingCustomer = customerRepository.findById(id)
+    public Customer updateCustomer(Long id, Customer customer) {
+        com.example.demo.entity.Customer existingCustomer = customerRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Customer not found with id: " + id));
 
-        existingCustomer.setFullname(customerDTO.getFullname());
-        existingCustomer.setUsername(customerDTO.getUsername());
-        existingCustomer.setDateofbirth(customerDTO.getDateofbirth());
-        existingCustomer.setGender(customerDTO.getGender());
-        existingCustomer.setAddress(customerDTO.getAddress());
-        existingCustomer.setEmail(customerDTO.getEmail());
-        existingCustomer.setPhonenumber(customerDTO.getPhonenumber());
-        existingCustomer.setNote(customerDTO.getNote());
-        existingCustomer.setCustomerLevel(customerDTO.getCustomerLevel());
-        existingCustomer.setLoyaltyPoint(customerDTO.getLoyaltyPoint());
+        existingCustomer.setFullname(customer.getFullname());
+        existingCustomer.setUsername(customer.getUsername());
+        existingCustomer.setDateofbirth(customer.getDateofbirth());
+        existingCustomer.setGender(customer.getGender());
+        existingCustomer.setAddress(customer.getAddress());
+        existingCustomer.setEmail(customer.getEmail());
+        existingCustomer.setPhonenumber(customer.getPhonenumber());
+        existingCustomer.setNote(customer.getNote());
+        existingCustomer.setCustomerLevel(customer.getCustomerLevel());
+        existingCustomer.setLoyaltyPoint(customer.getLoyaltyPoint());
 
-        Customer updatedCustomer = customerRepository.save(existingCustomer);
+        com.example.demo.entity.Customer updatedCustomer = customerRepository.save(existingCustomer);
 
         return CustomerMapper.toDTO(updatedCustomer);
     }

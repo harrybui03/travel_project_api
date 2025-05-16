@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.PartnerDTO;
+import com.example.demo.response.Partner;
 import com.example.demo.service.PartnerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,23 +17,23 @@ public class PartnerController {
     PartnerService partnerService;
 
     @GetMapping("/listAll")
-    public ResponseEntity<List<PartnerDTO>> getAllPartners() {
-        List<PartnerDTO> partnerDTOList = new ArrayList<>();
-        partnerDTOList = partnerService.getAllPartners();
-        return new ResponseEntity<>(partnerDTOList, HttpStatus.OK);
+    public ResponseEntity<List<Partner>> getAllPartners() {
+        List<Partner> partnerList = new ArrayList<>();
+        partnerList = partnerService.getAllPartners();
+        return new ResponseEntity<>(partnerList, HttpStatus.OK);
     }
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<PartnerDTO> getPartnerById(@PathVariable("id") Long id) {
-        PartnerDTO partnerDTO = partnerService.getPartnerById(id);
-        return new ResponseEntity<>(partnerDTO, HttpStatus.OK);
+    public ResponseEntity<Partner> getPartnerById(@PathVariable("id") Long id) {
+        Partner partner = partnerService.getPartnerById(id);
+        return new ResponseEntity<>(partner, HttpStatus.OK);
     }
 
     @PostMapping("/addPartner")
-    public ResponseEntity<PartnerDTO> addPartner(@RequestBody PartnerDTO partnerDTO) {
-        PartnerDTO partnerDTOSaved = partnerService.addPartner(partnerDTO);
-        return new ResponseEntity<>(partnerDTOSaved, HttpStatus.CREATED);
+    public ResponseEntity<Partner> addPartner(@RequestBody Partner partner) {
+        Partner partnerSaved = partnerService.addPartner(partner);
+        return new ResponseEntity<>(partnerSaved, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/deletePartner/{id}")
@@ -43,9 +43,9 @@ public class PartnerController {
     }
 
     @PatchMapping("updateBook/{id}")
-    public ResponseEntity<PartnerDTO> updatePartner(@PathVariable("id") Long id, @RequestBody PartnerDTO partnerDTO) {
-        partnerDTO.setId(id);
-        PartnerDTO partnerDTOSaved = partnerService.updatePartner(partnerDTO);
-        return new ResponseEntity<>(partnerDTOSaved, HttpStatus.OK);
+    public ResponseEntity<Partner> updatePartner(@PathVariable("id") Long id, @RequestBody Partner partner) {
+        partner.setId(id);
+        Partner partnerSaved = partnerService.updatePartner(partner);
+        return new ResponseEntity<>(partnerSaved, HttpStatus.OK);
     }
 }

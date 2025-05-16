@@ -1,10 +1,10 @@
-package com.example.demo.dto;
+package com.example.demo.request;
 
 import com.example.demo.entity.enums.BillType;
 
 import java.util.Date;
 
-public class BillDTO {
+public class BillRequest {
     private String paymentMethod;
     private Double paymentAmount;
     private Date paymentDate;
@@ -12,7 +12,7 @@ public class BillDTO {
     private Long userId;
 
 
-    public BillDTO(String paymentMethod, Double paymentAmount, Date paymentDate, BillType type , Long userId) {
+    public BillRequest(String paymentMethod, Double paymentAmount, Date paymentDate, BillType type , Long userId) {
         this.paymentMethod = paymentMethod;
         this.paymentAmount = paymentAmount;
         this.paymentDate = paymentDate;

@@ -1,13 +1,12 @@
 package com.example.demo.mapper;
 
-import com.example.demo.dto.TourServiceDTO;
-import com.example.demo.entity.TourService;
+import com.example.demo.response.TourService;
 
 public class TourServiceMapper {
 
     // map entity to dto
-    public static TourServiceDTO mapToTourServiceDTO(TourService tourService) {
-        TourServiceDTO tourServiceDTO = new TourServiceDTO();
+    public static TourService mapToTourServiceDTO(com.example.demo.entity.TourService tourService) {
+        TourService tourServiceDTO = new TourService();
         tourServiceDTO.setId(tourService.getId());
         tourServiceDTO.setName(tourService.getName());
         tourServiceDTO.setType(tourService.getType());
@@ -21,8 +20,8 @@ public class TourServiceMapper {
 
 
     // map dto to entity
-    public static TourService mapToTourServiceEntity(TourServiceDTO tourServiceDTO) {
-        TourService tourService = new TourService();
+    public static com.example.demo.entity.TourService mapToTourServiceEntity(TourService tourServiceDTO) {
+        com.example.demo.entity.TourService tourService = new com.example.demo.entity.TourService();
         tourService.setId(tourServiceDTO.getId());
         tourService.setName(tourServiceDTO.getName());
         tourService.setType(tourServiceDTO.getType());

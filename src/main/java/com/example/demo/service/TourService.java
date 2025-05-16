@@ -1,14 +1,13 @@
 package com.example.demo.service;
 
-import com.example.demo.dto.PartnerDTO;
-import com.example.demo.dto.TourDTO;
+import com.example.demo.response.Tour;
 
 import java.util.List;
 
 public interface TourService {
-    List<TourDTO> getAllTours();
-    TourDTO addTour(TourDTO tourDTO);
+    List<Tour> getAllTours();
+    Tour addTour(Tour tour);
     void deleteTour(Long id);
-    TourDTO updateTour(TourDTO tourDTO);
-    TourDTO getTourById(Long id);
+    Tour updateTour(Tour tour);
+    Tour getTourById(Long id);
 }

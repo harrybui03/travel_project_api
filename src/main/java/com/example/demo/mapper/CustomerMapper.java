@@ -1,12 +1,11 @@
 package com.example.demo.mapper;
 
-import com.example.demo.dto.CustomerDTO;
-import com.example.demo.entity.Customer;
+import com.example.demo.response.Customer;
 
 public class CustomerMapper {
 
-    public static CustomerDTO toDTO(Customer customer) {
-        CustomerDTO dto = new CustomerDTO();
+    public static Customer toDTO(com.example.demo.entity.Customer customer) {
+        Customer dto = new Customer();
         dto.setId(customer.getId());
         dto.setFullname(customer.getFullname());
         dto.setUsername(customer.getUsername());
@@ -21,8 +20,8 @@ public class CustomerMapper {
         return dto;
     }
 
-    public static Customer toEntity(CustomerDTO dto) {
-        Customer customer = new Customer();
+    public static com.example.demo.entity.Customer toEntity(Customer dto) {
+        com.example.demo.entity.Customer customer = new com.example.demo.entity.Customer();
         customer.setId(dto.getId());
         customer.setFullname(dto.getFullname());
         customer.setUsername(dto.getUsername());

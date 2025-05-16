@@ -1,7 +1,6 @@
-package com.example.demo.service.Impl;
+package com.example.demo.service.impl;
 
-import com.example.demo.dto.TourDTO;
-import com.example.demo.entity.Tour;
+import com.example.demo.response.Tour;
 import com.example.demo.mapper.TourMapper;
 import com.example.demo.repository.TourRepository;
 import com.example.demo.service.TourService;
@@ -21,15 +20,15 @@ public class TourServiceImpl implements TourService {
 
 
     @Override
-    public List<TourDTO> getAllTours() {
-       List<Tour> tours = new ArrayList<>();
+    public List<Tour> getAllTours() {
+       List<com.example.demo.entity.Tour> tours = new ArrayList<>();
        tours = tourRepository.findAll();
        return tours.stream().map(TourMapper::mapToTourDTO).collect(Collectors.toList());
     }
 
     @Override
-    public TourDTO addTour(TourDTO tourDTO) {
-        Tour tour = new Tour();
+    public Tour addTour(Tour tourDTO) {
+        com.example.demo.entity.Tour tour = new com.example.demo.entity.Tour();
         tour = TourMapper.mapToTourEntity(tourDTO);
         tourRepository.save(tour);
         return TourMapper.mapToTourDTO(tour);
@@ -42,16 +41,16 @@ public class TourServiceImpl implements TourService {
     }
 
     @Override
-    public TourDTO updateTour(TourDTO tourDTO) {
-        Optional<Tour> optionalTour = tourRepository.findById(tourDTO.getId());
+    public Tour updateTour(Tour tourDTO) {
+        Optional<com.example.demo.entity.Tour> optionalTour = tourRepository.findById(tourDTO.getId());
 
-        Tour tour = optionalTour.get();
+        com.example.demo.entity.Tour tour = optionalTour.get();
         updateTourEntityFromDTO(tour, tourDTO);
         tourRepository.save(tour);
         return TourMapper.mapToTourDTO(tour);
     }
 
-    private void updateTourEntityFromDTO(Tour tour, TourDTO tourDTO) {
+    private void updateTourEntityFromDTO(com.example.demo.entity.Tour tour, Tour tourDTO) {
         if (tourDTO.getId()!= null) {
             tour.setId(tourDTO.getId());
         }
@@ -76,9 +75,9 @@ public class TourServiceImpl implements TourService {
     }
 
     @Override
-    public TourDTO getTourById(Long id) {
-        Optional<Tour> optionalTour = tourRepository.findById(id);
-        Tour tour = optionalTour.get();
+    public Tour getTourById(Long id) {
+        Optional<com.example.demo.entity.Tour> optionalTour = tourRepository.findById(id);
+        com.example.demo.entity.Tour tour = optionalTour.get();
         return TourMapper.mapToTourDTO(tour);
     }
 }

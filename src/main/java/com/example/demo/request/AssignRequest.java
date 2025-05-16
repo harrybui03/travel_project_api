@@ -1,6 +1,28 @@
-package com.example.demo.dto;
+package com.example.demo.request;
+
+import com.example.demo.entity.Employee;
+import com.example.demo.entity.TourSchedule;
 
 public class AssignRequest {
+    private TourSchedule tourSchedule;
+    private Employee employee;
+
+    public TourSchedule getTourSchedule() {
+        return tourSchedule;
+    }
+
+    public void setTourSchedule(TourSchedule tourSchedule) {
+        this.tourSchedule = tourSchedule;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
     private Long tourScheduleId;
     private Long employeeId;
 

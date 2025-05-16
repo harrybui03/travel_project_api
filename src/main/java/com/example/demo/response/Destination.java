@@ -1,16 +1,16 @@
-package com.example.demo.dto;
+package com.example.demo.response;
 
 import java.util.Objects;
 
-public class DestinationDTO {
+public class Destination {
     private Long id;
     private String name;
     private String location;
 
-    public DestinationDTO() {
+    public Destination() {
     }
 
-    public DestinationDTO(Long id, String name, String location) {
+    public Destination(Long id, String name, String location) {
         this.id = id;
         this.name = name;
         this.location = location;
@@ -45,7 +45,7 @@ public class DestinationDTO {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        DestinationDTO that = (DestinationDTO) o;
+        Destination that = (Destination) o;
         return Objects.equals(id, that.id) &&
                 Objects.equals(name, that.name) &&
                 Objects.equals(location, that.location);

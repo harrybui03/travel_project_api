@@ -1,8 +1,8 @@
-package com.example.demo.dto;
+package com.example.demo.response;
 
 import java.util.Date;
 
-public class CustomerDTO {
+public class Customer {
     private Long id;
     private String fullname;
     private String username;
@@ -14,11 +14,11 @@ public class CustomerDTO {
     private String note;
     private Integer customerLevel;
     private Integer loyaltyPoint;
-    public CustomerDTO() {
+    public Customer() {
     }
 
     // Parameterized constructor (optional, for convenience)
-    public CustomerDTO(Long id, String fullname, String username, Date dateofbirth, String gender, String address, String email, String phonenumber, String note, Integer customerLevel, Integer loyaltyPoint) {
+    public Customer(Long id, String fullname, String username, Date dateofbirth, String gender, String address, String email, String phonenumber, String note, Integer customerLevel, Integer loyaltyPoint) {
         this.id = id;
         this.fullname = fullname;
         this.username = username;

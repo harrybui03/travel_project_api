@@ -1,10 +1,7 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.TourServiceDTO;
-import com.example.demo.entity.Employee;
-import com.example.demo.service.Impl.TourServiceEntityServiceImpl;
-import com.example.demo.service.TourService;
-import org.hibernate.annotations.UpdateTimestamp;
+import com.example.demo.response.TourService;
+import com.example.demo.service.impl.TourServiceEntityServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,22 +18,22 @@ public class TourServiceController {
     TourServiceEntityServiceImpl tourServiceEntityService;
 
     @GetMapping("listAll")
-    public ResponseEntity<List<TourServiceDTO>> getAllTourService() {
-        List<TourServiceDTO> tourServices = new ArrayList<>();
+    public ResponseEntity<List<TourService>> getAllTourService() {
+        List<TourService> tourServices = new ArrayList<>();
         tourServices = tourServiceEntityService.getAllTourServices();
         return new ResponseEntity<>(tourServices, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<TourServiceDTO> getTourServiceById(@PathVariable("id") Long id ) {
-        TourServiceDTO tourServiceDTO = tourServiceEntityService.getTourServiceById(id);
-        return new ResponseEntity<>(tourServiceDTO, HttpStatus.OK);
+    public ResponseEntity<TourService> getTourServiceById(@PathVariable("id") Long id ) {
+        TourService tourService = tourServiceEntityService.getTourServiceById(id);
+        return new ResponseEntity<>(tourService, HttpStatus.OK);
     }
 
     @PostMapping("/addTourService")
-    public  ResponseEntity<TourServiceDTO> addTourService(@RequestBody TourServiceDTO tourServiceDTO) {
-        TourServiceDTO savedTourServiceDTO = tourServiceEntityService.addTourService(tourServiceDTO);
-        return new ResponseEntity<>(savedTourServiceDTO, HttpStatus.CREATED);
+    public  ResponseEntity<TourService> addTourService(@RequestBody TourService tourService) {
+        TourService savedTourService = tourServiceEntityService.addTourService(tourService);
+        return new ResponseEntity<>(savedTourService, HttpStatus.CREATED);
 
     }
 
@@ -47,9 +44,9 @@ public class TourServiceController {
     }
 
     @PatchMapping("/update/{id}")
-    public ResponseEntity<TourServiceDTO> updateTourService(@PathVariable("id") Long id, @RequestBody TourServiceDTO tourServiceDTO) {
-        tourServiceDTO.setId(id);
-        TourServiceDTO updatedTourService = tourServiceEntityService.updateTourService(tourServiceDTO);
+    public ResponseEntity<TourService> updateTourService(@PathVariable("id") Long id, @RequestBody TourService tourService) {
+        tourService.setId(id);
+        TourService updatedTourService = tourServiceEntityService.updateTourService(tourService);
         return new ResponseEntity<>(updatedTourService, HttpStatus.OK);
     }
 }

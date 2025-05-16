@@ -1,17 +1,13 @@
-package com.example.demo.dto;
+package com.example.demo.response;
 
-import com.example.demo.entity.Partner;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-
-public class TourServiceDTO {
+public class TourService {
     private Long id;
     private String name;
     private String type;
     private Double price;
-    private PartnerDTO partner;
+    private Partner partner;
 
-    public TourServiceDTO() {
+    public TourService() {
     }
 
     public Long getId() {
@@ -22,11 +18,11 @@ public class TourServiceDTO {
         this.id = id;
     }
 
-    public PartnerDTO getPartner() {
+    public Partner getPartner() {
         return partner;
     }
 
-    public void setPartner(PartnerDTO partner) {
+    public void setPartner(Partner partner) {
         this.partner = partner;
     }
 

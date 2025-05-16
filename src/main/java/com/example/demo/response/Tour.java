@@ -1,10 +1,6 @@
-package com.example.demo.dto;
+package com.example.demo.response;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-
-public class TourDTO {
+public class Tour {
         private Long id;
         private String tourName;
         private String transportation;
@@ -12,10 +8,10 @@ public class TourDTO {
         private String description;
         private Double price;
         private String tourDuration;
-        private DestinationDTO destinationDTO;
+        private Destination destination;
         private Long destination_id;
 
-    public TourDTO() {
+    public Tour() {
     }
 
     public Double getPrice() {
