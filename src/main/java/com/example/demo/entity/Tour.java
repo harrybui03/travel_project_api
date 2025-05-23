@@ -29,12 +29,22 @@ public class Tour {
     )
     private Set<Destination> destinations = new HashSet<>();
 
+
+
+    public List<TourSchedule> getTourSchedule() {
+        return tourSchedule;
+    }
+
+    public void setTourSchedule(List<TourSchedule> tourSchedule) {
+        this.tourSchedule = tourSchedule;
+    }
+
     public Tour() {
     }
 
     @OneToMany(mappedBy = "tour", fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<TourSchedule> tourSchedules = new ArrayList<>();
-
     public List<TourSchedule> getTourSchedules() {
         return tourSchedules;
     }
@@ -106,4 +116,6 @@ public class Tour {
     public void setDestinations(Set<Destination> destinations) {
         this.destinations = destinations;
     }
+    @Transient
+    private List<TourSchedule> tourSchedule = new ArrayList<>();
 }

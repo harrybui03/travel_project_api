@@ -1,7 +1,9 @@
 package com.example.demo.entity;
 
-import com.example.demo.entity.enums.EmployeeRole;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @PrimaryKeyJoinColumn(name = "id")
@@ -9,19 +11,27 @@ public class TourGuide extends Member {
     private String position;
     private String department;
     private Double salary;
-    private Double bonus;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private EmployeeRole role;
+    @ManyToMany(mappedBy = "tourGuides")
+    @JsonIgnore
+    private List<TourSchedule> tourSchedules = new ArrayList<>();
 
     public TourGuide() {
     }
 
-    public TourGuide(Long i, String johnDoe, String tourGuide) {
-
+    public TourGuide(String position, String department, Double salary) {
+        this.position = position;
+        this.department = department;
+        this.salary = salary;
     }
 
+    public List<TourSchedule> getTourSchedules() {
+        return tourSchedules;
+    }
+
+    public void setTourSchedules(List<TourSchedule> tourSchedules) {
+        this.tourSchedules = tourSchedules;
+    }
 
     public String getPosition() {
         return position;
@@ -31,15 +41,12 @@ public class TourGuide extends Member {
         this.position = position;
     }
 
-
-
-
-    public Double getBonus() {
-        return bonus;
+    public String getDepartment() {
+        return department;
     }
 
-    public void setBonus(Double bonus) {
-        this.bonus = bonus;
+    public void setDepartment(String department) {
+        this.department = department;
     }
 
     public Double getSalary() {
@@ -48,21 +55,5 @@ public class TourGuide extends Member {
 
     public void setSalary(Double salary) {
         this.salary = salary;
-    }
-
-    public EmployeeRole getRole() {
-        return role;
-    }
-
-    public void setRole(EmployeeRole role) {
-        this.role = role;
-    }
-
-    public String getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(String department) {
-        this.department = department;
     }
 }

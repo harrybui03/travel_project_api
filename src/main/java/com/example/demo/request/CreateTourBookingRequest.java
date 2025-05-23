@@ -1,27 +1,30 @@
 package com.example.demo.request;
 
+import com.example.demo.entity.Customer;
+import com.example.demo.entity.Tour;
+
 public class CreateTourBookingRequest {
-    private int numberOfTicket;
-    private Long userId;
+   Tour tour;
+   Customer customer;
 
-    public CreateTourBookingRequest(int numberOfTicket, Long userId) {
-        this.numberOfTicket = numberOfTicket;
-        this.userId = userId;
+    public CreateTourBookingRequest(Tour tour, Customer customer) {
+        this.tour = tour;
+        this.customer = customer;
     }
 
-    public int getNumberOfTicket() {
-        return numberOfTicket;
+    public Tour getTour() {
+        return tour;
     }
 
-    public void setNumberOfTicket(int numberOfTicket) {
-        this.numberOfTicket = numberOfTicket;
+    public void setTour(Tour tour) {
+        this.tour = tour;
     }
 
-    public Long getUserId() {
-        return userId;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 }

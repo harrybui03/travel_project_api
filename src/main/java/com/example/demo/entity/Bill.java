@@ -3,7 +3,9 @@ package com.example.demo.entity;
 import com.example.demo.entity.enums.BillType;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
 @Entity
@@ -28,6 +30,9 @@ public class Bill {
     @ManyToOne
     @JoinColumn(name = "tour_booking_id", nullable = true)
     private TourBooking tourBooking;
+
+    @OneToMany(mappedBy = "bill", fetch = FetchType.LAZY)
+    private List<Ticket> tickets = new ArrayList<>();
 
     public Bill() {
     }

@@ -18,16 +18,35 @@ public class TourSchedule {
 
     @ManyToOne
     @JoinColumn(name = "tour_id")
-    @JsonIgnore
     private Tour tour;
 
     @ManyToMany
     @JoinTable(
-            name = "tour_schedule_employee",
+            name = "tour_schedule_tour_guide",
             joinColumns = @JoinColumn(name = "tour_schedule_id"),
-            inverseJoinColumns = @JoinColumn(name = "employee_id")
+            inverseJoinColumns = @JoinColumn(name = "tour_guide_id")
     )
-    private List<Employee> employees = new ArrayList<>();
+    private List<TourGuide> tourGuides = new ArrayList<>();
+
+    public List<TourGuide> getTourGuides() {
+        return tourGuides;
+    }
+
+    @OneToMany(mappedBy = "tourSchedule", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<TourBooking> tourBookings = new ArrayList<>();
+
+    public List<TourBooking> getTourBookings() {
+        return tourBookings;
+    }
+
+    public void setTourBookings(List<TourBooking> tourBookings) {
+        this.tourBookings = tourBookings;
+    }
+
+    public void setTourGuides(List<TourGuide> tourGuides) {
+        this.tourGuides = tourGuides;
+    }
 
     public TourSchedule() {
     }
@@ -62,13 +81,5 @@ public class TourSchedule {
 
     public void setDepartureDate(Date departureDate) {
         this.departureDate = departureDate;
-    }
-
-    public List<Employee> getEmployees() {
-        return employees;
-    }
-
-    public void setEmployees(List<Employee> employees) {
-        this.employees = employees;
     }
 }

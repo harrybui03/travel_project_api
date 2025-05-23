@@ -44,23 +44,14 @@ public class BookingTourController {
         }
     }
 
-    @PostMapping("/schedules/{tourScheduleId}")
-    public ResponseEntity<TourBooking> createTourBooking(@PathVariable Long tourScheduleId, @RequestBody CreateTourBookingRequest createTourBookingRequest) {
-        TourBooking booking = bookingTourService.createTourBooking(tourScheduleId, createTourBookingRequest);
-        if (booking != null) {
-            return new ResponseEntity<>(booking, HttpStatus.CREATED);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-
-    @PostMapping("/{tourBookingId}/bills")
-    public ResponseEntity<Bill> createBill(@PathVariable Long tourBookingId, @RequestBody BillRequest billDTO) {
-        Bill bill = bookingTourService.createBill(tourBookingId, billDTO);
+    @PostMapping("/schedules")
+    public ResponseEntity<Bill> createTourBooking(@RequestBody CreateTourBookingRequest createTourBookingRequest) {
+        Bill bill = bookingTourService.createTourBooking(createTourBookingRequest.getTour(), createTourBookingRequest.getCustomer());
         if (bill != null) {
             return new ResponseEntity<>(bill, HttpStatus.CREATED);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
 }

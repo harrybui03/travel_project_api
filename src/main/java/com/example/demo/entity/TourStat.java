@@ -1,7 +1,10 @@
-package com.example.demo.response;
+package com.example.demo.entity;
 
+
+import com.example.demo.response.TourScheduleStat;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class TourStat implements Serializable {
     private Long tourId;
@@ -9,15 +12,18 @@ public class TourStat implements Serializable {
     private int totalTickets;
     private double totalRevenue;
 
+    private List<TourScheduleStat> tourScheduleStatList;
     public TourStat() {
     }
 
-    public TourStat(Long tourId, String tourName, int totalTickets, double totalRevenue) {
+    public TourStat(Long tourId, String tourName, int totalTickets, double totalRevenue, List<TourScheduleStat> tourScheduleStatList) {
         this.tourId = tourId;
         this.tourName = tourName;
         this.totalTickets = totalTickets;
         this.totalRevenue = totalRevenue;
+        this.tourScheduleStatList = tourScheduleStatList;
     }
+
 
     public Long getTourId() {
         return tourId;
@@ -51,5 +57,13 @@ public class TourStat implements Serializable {
 
     public void setTotalRevenue(double totalRevenue) {
         this.totalRevenue = totalRevenue;
+    }
+
+    public List<TourScheduleStat> getTourScheduleStatList() {
+        return tourScheduleStatList;
+    }
+
+    public void setTourScheduleStatList(List<TourScheduleStat> tourScheduleStatList) {
+        this.tourScheduleStatList = tourScheduleStatList;
     }
 }

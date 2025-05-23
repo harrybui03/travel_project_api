@@ -39,7 +39,7 @@ public class BookingTourServiceImpl implements BookingTourService {
     @Override
     public List<TourSchedule> getListTourSchedule(Long tourId) {
         List<TourSchedule> tourSchedules = tourScheduleRepository.findByTour_Id(tourId).stream().filter(tourSchedule -> {
-            return tourSchedule.getEmployees() != null;
+            return tourSchedule.getTourGuides() != null;
         }).toList();
         return tourSchedules;
     }
@@ -57,39 +57,15 @@ public class BookingTourServiceImpl implements BookingTourService {
     }
 
     @Override
-    public TourBooking createTourBooking(Long tourScheduleId, CreateTourBookingRequest createTourBookingRequest) {
-        Optional<TourSchedule> tourSchedule = tourScheduleRepository.findById(tourScheduleId);
-        if (tourSchedule.isEmpty()) {
-            System.out.println("Tour Schedule not found with ID: " + tourScheduleId);
-            return null;
-        }
+    public Bill createTourBooking(Tour tour , Customer customer) {
+        TourSchedule tourSchedule = tour.getTourSchedules().get(0);
+        TourBooking tourBooking = tourSchedule.getTourBookings().get(0);
+        Bill billEntity = tourBooking.getBills().get(0);
+        TourBooking booking = tourBookingRepository.save(new TourBooking(Long.valueOf(50) , tourBooking.getNumberOfCustomer() , tourSchedule ,customer));
 
-        Customer customer = customerRepository.findById(createTourBookingRequest.getUserId()).get();
+        Bill bill = billRepository.save(new Bill(billEntity.getBillType(), billEntity.getPaymentMethod() , billEntity.getPaymentAmount() ,billEntity.getPaymentDate() , customer , booking));
 
-        TourBooking booking = tourBookingRepository.save(new TourBooking(createTourBookingRequest.getNumberOfTicket() , tourSchedule.get() ,customer));
-        return booking;
-    }
-
-    private Long generatePositiveRandomLong() {
-        Random random = new Random();
-        long randomNumber;
-        do {
-            randomNumber = random.nextLong();
-        } while (randomNumber <= 0);
-        return randomNumber;
-    }
-
-    @Override
-    public Bill createBill(Long tourBookingId, BillRequest billDTO) {
-        Optional<TourBooking> tourBooking = tourBookingRepository.findById(tourBookingId);
-        if (tourBooking.isEmpty()){
-            return null;
-        }
-        Customer customer = customerRepository.findById(billDTO.getUserId()).get();
-
-        Bill bill = billRepository.save(new Bill(billDTO.getType(), billDTO.getPaymentMethod() , billDTO.getPaymentAmount() ,billDTO.getPaymentDate() , customer , tourBooking.get()));
-
-        int numberOfTickets = tourBooking.get().getNumberOfCustomer();
+        int numberOfTickets = tourBooking.getNumberOfCustomer();
         List<Ticket> tickets = new java.util.ArrayList<>();
         for (int i = 0; i < numberOfTickets; i++) {
             Ticket ticket = new Ticket();
@@ -100,5 +76,14 @@ public class BookingTourServiceImpl implements BookingTourService {
         ticketRepository.saveAll(tickets);
 
         return bill;
+    }
+
+    private Long generatePositiveRandomLong() {
+        Random random = new Random();
+        long randomNumber;
+        do {
+            randomNumber = random.nextLong();
+        } while (randomNumber <= 0);
+        return randomNumber;
     }
 }

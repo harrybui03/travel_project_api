@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.Tour;
+import com.example.demo.entity.TourGuide;
 import com.example.demo.request.AssignRequest;
 import com.example.demo.entity.Employee;
 import com.example.demo.entity.TourSchedule;
@@ -31,13 +32,13 @@ public class AssignTourController {
     }
 
     @GetMapping("/tour-guides")
-    public ResponseEntity<List<Employee>> getListTourGuides() {
-        List<Employee> tourGuides = assignService.getListTourGuides();
+    public ResponseEntity<List<TourGuide>> getListTourGuides() {
+        List<TourGuide> tourGuides = assignService.getListTourGuides();
         return new ResponseEntity<>(tourGuides, HttpStatus.OK);
     }
 
-    @PostMapping("/assign-employee")
-    public ResponseEntity<String> assignEmployeeToTour(@RequestBody Tour tour) {
+    @PostMapping("/assign-tour-guide")
+    public ResponseEntity<String> assignTourGuideToTour(@RequestBody Tour tour) {
         boolean assignmentResult = assignService.assignTour(tour);
         if (assignmentResult) {
             return new ResponseEntity<>("Employee assigned to tour successfully.", HttpStatus.OK);

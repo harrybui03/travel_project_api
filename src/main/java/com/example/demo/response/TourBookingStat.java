@@ -2,13 +2,13 @@ package com.example.demo.response;
 
 import java.math.BigDecimal;
 
-public class TourBookingInfo {
+public class TourBookingStat {
     private Long bookingId;
     private String customerFullName;
     private Integer numberOfTickets;
     private BigDecimal totalAmount;
 
-    public TourBookingInfo(Long bookingId, String customerFullName, Integer numberOfTickets, BigDecimal totalAmount) {
+    public TourBookingStat(Long bookingId, String customerFullName, Integer numberOfTickets, BigDecimal totalAmount) {
         this.bookingId = bookingId;
         this.customerFullName = customerFullName;
         this.numberOfTickets = numberOfTickets;

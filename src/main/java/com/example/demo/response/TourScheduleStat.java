@@ -2,23 +2,25 @@ package com.example.demo.response;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
-public class TourScheduleInfo {
+public class TourScheduleStat {
     private Long tourScheduleId;
     private LocalDate startDate;
     private LocalDate endDate;
-    private String tourGuide;
+    private List<String> tourGuide;
     private Long totalTicket;
     private BigDecimal totalRevenue;
 
-    public TourScheduleInfo() {
+    private List<TourBookingStat> tourBookingStatList;
+    public TourScheduleStat() {
     }
 
-    public TourScheduleInfo(Long tourScheduleId, LocalDate startDate, LocalDate endDate, String tourGuide, Long totalTicket, BigDecimal totalRevenue) {
+    public TourScheduleStat(Long tourScheduleId, LocalDate startDate, LocalDate endDate,  Long totalTicket, BigDecimal totalRevenue) {
         this.tourScheduleId = tourScheduleId;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.tourGuide = tourGuide;
         this.totalTicket = totalTicket;
         this.totalRevenue = totalRevenue;
     }
@@ -35,7 +37,7 @@ public class TourScheduleInfo {
         return endDate;
     }
 
-    public String getTourGuide() {
+    public List<String> getTourGuide() {
         return tourGuide;
     }
 
@@ -59,7 +61,7 @@ public class TourScheduleInfo {
         this.endDate = endDate;
     }
 
-    public void setTourGuide(String tourGuide) {
+    public void setTourGuide(List<String> tourGuide) {
         this.tourGuide = tourGuide;
     }
 
@@ -69,5 +71,13 @@ public class TourScheduleInfo {
 
     public void setTotalRevenue(BigDecimal totalRevenue) {
         this.totalRevenue = totalRevenue;
+    }
+
+    public List<TourBookingStat> getTourBookingStatList() {
+        return tourBookingStatList;
+    }
+
+    public void setTourBookingStatList(List<TourBookingStat> tourBookingStatList) {
+        this.tourBookingStatList = tourBookingStatList;
     }
 }

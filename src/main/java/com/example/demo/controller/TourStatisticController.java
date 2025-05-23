@@ -1,8 +1,8 @@
 package com.example.demo.controller;
 
-import com.example.demo.response.TourBookingInfo;
-import com.example.demo.response.TourScheduleInfo;
-import com.example.demo.response.TourStat;
+import com.example.demo.response.TourBookingStat;
+import com.example.demo.response.TourScheduleStat;
+import com.example.demo.entity.TourStat;
 import com.example.demo.service.TourStatisticService;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
@@ -29,14 +29,14 @@ public class TourStatisticController {
     }
 
     @GetMapping("/{tourId}")
-    public ResponseEntity<List<TourScheduleInfo>> getTourSchedulesWithDetails(@PathVariable Long tourId) {
-        List<TourScheduleInfo> tourScheduleInfos = tourStatisticService.GetListTourSchedule(tourId);
-        return ResponseEntity.ok(tourScheduleInfos);
+    public ResponseEntity<List<TourScheduleStat>> getTourSchedulesWithDetails(@PathVariable Long tourId) {
+        List<TourScheduleStat> tourScheduleStats = tourStatisticService.GetListTourSchedule(tourId);
+        return ResponseEntity.ok(tourScheduleStats);
     }
 
     @GetMapping("/schedule/{tourScheduleId}/bookings")
-    public ResponseEntity<List<TourBookingInfo>> getBookingsByTourScheduleId(@PathVariable Long tourScheduleId) {
-        List<TourBookingInfo> tourBookingInfos = tourStatisticService.GetListTourBooking(tourScheduleId);
-        return ResponseEntity.ok(tourBookingInfos);
+    public ResponseEntity<List<TourBookingStat>> getBookingsByTourScheduleId(@PathVariable Long tourScheduleId) {
+        List<TourBookingStat> tourBookingStats = tourStatisticService.GetListTourBooking(tourScheduleId);
+        return ResponseEntity.ok(tourBookingStats);
     }
 }
