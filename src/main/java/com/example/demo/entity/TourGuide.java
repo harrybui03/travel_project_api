@@ -12,9 +12,9 @@ public class TourGuide extends Member {
     private String department;
     private Double salary;
 
-    @ManyToMany(mappedBy = "tourGuides")
+    @OneToMany(mappedBy = "tourGuide", fetch = FetchType.LAZY)
     @JsonIgnore
-    private List<TourSchedule> tourSchedules = new ArrayList<>();
+    private List<TourGuideSchedule> tourSchedules;
 
     public TourGuide() {
     }
@@ -25,11 +25,11 @@ public class TourGuide extends Member {
         this.salary = salary;
     }
 
-    public List<TourSchedule> getTourSchedules() {
+    public List<TourGuideSchedule> getTourSchedules() {
         return tourSchedules;
     }
 
-    public void setTourSchedules(List<TourSchedule> tourSchedules) {
+    public void setTourSchedules(List<TourGuideSchedule> tourSchedules) {
         this.tourSchedules = tourSchedules;
     }
 

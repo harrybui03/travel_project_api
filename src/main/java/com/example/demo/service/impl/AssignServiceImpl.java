@@ -2,13 +2,16 @@ package com.example.demo.service.impl;
 
 import com.example.demo.entity.Tour;
 import com.example.demo.entity.TourGuide;
+import com.example.demo.entity.TourGuideSchedule;
 import com.example.demo.entity.TourSchedule;
 import com.example.demo.repository.TourGuideRepository;
+import com.example.demo.repository.TourGuideScheduleRepository;
 import com.example.demo.repository.TourScheduleRepository;
 import com.example.demo.service.AssignService;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -18,9 +21,12 @@ public class AssignServiceImpl implements AssignService {
     private final TourScheduleRepository tourScheduleRepository;
     private final TourGuideRepository tourGuideRepository;
 
-    public AssignServiceImpl(TourScheduleRepository tourScheduleRepository, TourGuideRepository tourGuideRepository) {
+    private final TourGuideScheduleRepository tourGuideScheduleRepository;
+
+    public AssignServiceImpl(TourScheduleRepository tourScheduleRepository, TourGuideRepository tourGuideRepository, TourGuideScheduleRepository tourGuideScheduleRepository) {
         this.tourScheduleRepository = tourScheduleRepository;
         this.tourGuideRepository = tourGuideRepository;
+        this.tourGuideScheduleRepository = tourGuideScheduleRepository;
     }
 
     @Override
@@ -47,37 +53,18 @@ public class AssignServiceImpl implements AssignService {
         Date tourDepartureDate = tourSchedule.getDepartureDate();
         Date tourReturnDate = tourSchedule.getReturnDate();
 
-        List<TourGuide> tourGuidesFromSchedule = tourSchedule.getTourGuides();
-
-
-        if (tourGuidesFromSchedule == null || tourGuidesFromSchedule.isEmpty()) {
-            return false;
-        }
-
-        for (TourGuide tourGuideToAssign : tourGuidesFromSchedule) {
-            if (tourGuideToAssign.getId() == null) {
-                return false;
-            }
-
-            Optional<TourGuide> tourGuideOptional = tourGuideRepository.findById(tourGuideToAssign.getId());
-            if (tourGuideOptional.isEmpty()) {
-                return false;
-            }
-            TourGuide managedTourGuide = tourGuideOptional.get();
-
-            if (!isTourGuideAvailable(managedTourGuide, tourDepartureDate, tourReturnDate , tourSchedule)) {
+        for (TourGuideSchedule tourGuideToAssign : tourSchedule.getTourGuides()) {
+            if (!isTourGuideAvailable(tourGuideToAssign.getTourGuide(), tourDepartureDate, tourReturnDate , tourSchedule)) {
                 return false;
             }
         }
 
-        tourSchedule.setTour(tour);
-
-        tourScheduleRepository.save(tourSchedule);
+        tourGuideScheduleRepository.saveAll(tourSchedule.getTourGuides());
         return true;
     }
 
     private boolean isTourGuideAvailable(TourGuide tourGuide, Date departureDate, Date returnDate , TourSchedule tourSchedule) {
-        List<TourSchedule> assignedTours = tourScheduleRepository.findByTourGuides(tourGuide);
+        List<TourSchedule> assignedTours = tourGuideScheduleRepository.findSchedulesByTourGuideJPQL(tourGuide);
         for (TourSchedule assignedTour : assignedTours) {
             if(tourSchedule.getId() == assignedTour.getId()){
                 return true;

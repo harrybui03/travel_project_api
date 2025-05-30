@@ -20,21 +20,14 @@ public class TourSchedule {
     @JoinColumn(name = "tour_id")
     private Tour tour;
 
-    @ManyToMany
-    @JoinTable(
-            name = "tour_schedule_tour_guide",
-            joinColumns = @JoinColumn(name = "tour_schedule_id"),
-            inverseJoinColumns = @JoinColumn(name = "tour_guide_id")
-    )
-    private List<TourGuide> tourGuides = new ArrayList<>();
-
-    public List<TourGuide> getTourGuides() {
-        return tourGuides;
-    }
+    @OneToMany(mappedBy = "tourSchedule", fetch = FetchType.EAGER)
+    private List<TourGuideSchedule> tourGuides;
+    @OneToMany(mappedBy = "tourSchedule", fetch = FetchType.LAZY)
+    private List<DestinationOnTourSchedule> destination;
 
     @OneToMany(mappedBy = "tourSchedule", fetch = FetchType.LAZY)
     @JsonIgnore
-    private List<TourBooking> tourBookings = new ArrayList<>();
+    private List<TourBooking> tourBookings;
 
     public List<TourBooking> getTourBookings() {
         return tourBookings;
@@ -42,10 +35,6 @@ public class TourSchedule {
 
     public void setTourBookings(List<TourBooking> tourBookings) {
         this.tourBookings = tourBookings;
-    }
-
-    public void setTourGuides(List<TourGuide> tourGuides) {
-        this.tourGuides = tourGuides;
     }
 
     public TourSchedule() {
@@ -81,5 +70,27 @@ public class TourSchedule {
 
     public void setDepartureDate(Date departureDate) {
         this.departureDate = departureDate;
+    }
+
+    public List<TourGuideSchedule> getTourGuides() {
+        List<TourGuideSchedule> tourGuideSchedules = this.tourGuides.stream().map(
+                tourGuideSchedule -> {
+                    tourGuideSchedule.setTourSchedule(this);
+                    return tourGuideSchedule;
+                }
+        ).toList();
+        return tourGuideSchedules;
+    }
+
+    public void setTourGuides(List<TourGuideSchedule> tourGuides) {
+        this.tourGuides = tourGuides;
+    }
+
+    public List<DestinationOnTourSchedule> getDestination() {
+        return destination;
+    }
+
+    public void setDestination(List<DestinationOnTourSchedule> destination) {
+        this.destination = destination;
     }
 }

@@ -13,7 +13,6 @@ public class Tour {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String tourName;
     private String transportation;
     private Integer maxCustomer;
@@ -21,30 +20,12 @@ public class Tour {
     private Double price;
     private String tourDuration;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "destination_on_tour",
-            joinColumns = @JoinColumn(name = "tour_id"),
-            inverseJoinColumns = @JoinColumn(name = "destination_id")
-    )
-    private Set<Destination> destinations = new HashSet<>();
-
-
-
-    public List<TourSchedule> getTourSchedule() {
-        return tourSchedule;
-    }
-
-    public void setTourSchedule(List<TourSchedule> tourSchedule) {
-        this.tourSchedule = tourSchedule;
-    }
+    @OneToMany(mappedBy = "tour", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<TourSchedule> tourSchedules;
 
     public Tour() {
     }
-
-    @OneToMany(mappedBy = "tour", fetch = FetchType.LAZY)
-    @JsonIgnore
-    private List<TourSchedule> tourSchedules = new ArrayList<>();
     public List<TourSchedule> getTourSchedules() {
         return tourSchedules;
     }
@@ -109,12 +90,12 @@ public class Tour {
         this.tourName = tourName;
     }
 
-    public Set<Destination> getDestinations() {
-        return destinations;
+    public List<TourSchedule> getTourSchedule() {
+        return tourSchedule;
     }
 
-    public void setDestinations(Set<Destination> destinations) {
-        this.destinations = destinations;
+    public void setTourSchedule(List<TourSchedule> tourSchedule) {
+        this.tourSchedule = tourSchedule;
     }
     @Transient
     private List<TourSchedule> tourSchedule = new ArrayList<>();
