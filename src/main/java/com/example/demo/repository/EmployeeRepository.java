@@ -5,7 +5,11 @@ import com.example.demo.entity.enums.EmployeeRole;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     List<Employee> findByRole(EmployeeRole role);
+
+    Optional<Employee> findByEmail(String email);
+
 }

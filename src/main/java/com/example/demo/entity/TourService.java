@@ -1,7 +1,9 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.*;
-
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 
 @Entity
@@ -9,14 +11,10 @@ public class TourService {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
     private String type;
     private Double price;
-
-    @ManyToOne
-    @JoinColumn(name = "partner_id")
-    private Partner partner;
+    private Long partnerId;
 
     public TourService() {
     }
@@ -29,12 +27,12 @@ public class TourService {
         this.id = id;
     }
 
-    public Partner getPartner() {
-        return partner;
+    public Long getPartnerId() {
+        return partnerId;
     }
 
-    public void setPartner(Partner partner) {
-        this.partner = partner;
+    public void setPartnerId(Long partnerId) {
+        this.partnerId = partnerId;
     }
 
     public Double getPrice() {
@@ -60,5 +58,6 @@ public class TourService {
     public void setName(String name) {
         this.name = name;
     }
+
 }
 

@@ -1,14 +1,12 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.dto.CustomerDTO;
+
 import com.example.demo.entity.Customer;
-import com.example.demo.mapper.CustomerMapper;
 import com.example.demo.repository.CustomerRepository;
 import com.example.demo.service.CustomerService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -20,33 +18,30 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public CustomerDTO createCustomer(CustomerDTO customerDTO) {
-        Customer customer = CustomerMapper.toEntity(customerDTO);
+    public Customer createCustomer(Customer customer) {
 
         Customer savedCustomer = customerRepository.save(customer);
 
-        return CustomerMapper.toDTO(savedCustomer);
+        return savedCustomer;
     }
 
     @Override
-    public CustomerDTO getCustomerById(Long id) {
+    public Customer getCustomerById(Long id) {
         Customer customer = customerRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Customer not found with id: " + id));
 
-        return CustomerMapper.toDTO(customer);
+        return customer;
     }
 
     @Override
-    public List<CustomerDTO> getAllCustomers() {
+    public List<Customer> getAllCustomers() {
         List<Customer> customers = customerRepository.findAll();
 
-        return customers.stream()
-                .map(CustomerMapper::toDTO)
-                .collect(Collectors.toList());
+        return customers;
     }
 
     @Override
-    public CustomerDTO updateCustomer(Long id, CustomerDTO customerDTO) {
+    public Customer updateCustomer(Long id, Customer customerDTO) {
         Customer existingCustomer = customerRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Customer not found with id: " + id));
 
@@ -63,7 +58,7 @@ public class CustomerServiceImpl implements CustomerService {
 
         Customer updatedCustomer = customerRepository.save(existingCustomer);
 
-        return CustomerMapper.toDTO(updatedCustomer);
+        return updatedCustomer;
     }
 
     @Override

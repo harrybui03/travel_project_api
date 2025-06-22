@@ -1,15 +1,14 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.dto.PartnerDTO;
+
 import com.example.demo.entity.Partner;
-import com.example.demo.mapper.PartnerMapper;
 import com.example.demo.repository.PartnerRepository;
 import com.example.demo.service.PartnerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class PartnerServiceImpl implements PartnerService {
@@ -18,19 +17,14 @@ public class PartnerServiceImpl implements PartnerService {
 
 
     @Override
-    public List<PartnerDTO> getAllPartners() {
+    public List<Partner> getAllPartners() {
         List<Partner> partners = partnerRepository.findAll();
-        // duyet qua cac phan tu cua partners
-        // map partner -> partnerDTO
-        // return list<PartnerDTO>
-        return partners.stream().map(PartnerMapper::mapToPartnerDTO).collect(Collectors.toList());
+        return partners;
     }
 
     @Override
-    public PartnerDTO addPartner(PartnerDTO partnerDTO) {
-        Partner partner = PartnerMapper.mapToPartnerEntity(partnerDTO);
-        partner = partnerRepository.save(partner);
-        return PartnerMapper.mapToPartnerDTO(partner);
+    public Partner addPartner(Partner partner) {
+        return partnerRepository.save(partner);
     }
 
     @Override
@@ -42,39 +36,38 @@ public class PartnerServiceImpl implements PartnerService {
     }
 
     @Override
-    public PartnerDTO updatePartner(PartnerDTO partnerDTO) {
+    public Partner updatePartner(Partner partner) {
         // tim partner ton tai trong db qua id
-        Optional<Partner> partnerOptional = partnerRepository.findById(partnerDTO.getId());
+        Optional<Partner> partnerOptional = partnerRepository.findById(partner.getId());
 
         // cap nhat thong tin partner ( chi cap nhat phan non-null
         Partner partnerToUpdate = partnerOptional.orElseThrow(
-                () -> new RuntimeException("Partner with id " + partnerDTO.getId() + " does not exist"));
-
-        Partner savedPartner = partnerRepository.save(partnerToUpdate);
-        return PartnerMapper.mapToPartnerDTO(savedPartner);
+                () -> new RuntimeException("Partner with id " + partner.getId() + " does not exist"));
+        updatePartner(partnerToUpdate, partner);
+        return partnerRepository.save(partnerToUpdate);
 
     }
 
     @Override
-    public PartnerDTO getPartnerById(Long id) {
+    public Partner getPartnerById(Long id) {
         Partner partner = partnerRepository.findById(id).orElseThrow(
                 () -> new RuntimeException("Partner with id " + id + " does not exist")
         );
-        return PartnerMapper.mapToPartnerDTO(partner);
+        return partner;
     }
 
-    private void updatePartnerFromDTO(Partner partnerToUpdate, PartnerDTO partnerDTO) {
-        if (partnerDTO.getName()!=null) {
-            partnerToUpdate.setName(partnerDTO.getName());
+    private void updatePartner(Partner partnerToUpdate, Partner partner) {
+        if (partner.getName() != null) {
+            partnerToUpdate.setName(partner.getName());
         }
-        if (partnerDTO.getAddress()!=null) {
-            partnerToUpdate.setAddress(partnerDTO.getAddress());
+        if (partner.getAddress() != null) {
+            partnerToUpdate.setAddress(partner.getAddress());
         }
-        if (partnerDTO.getEmail()!=null) {
-            partnerToUpdate.setEmail(partnerDTO.getEmail());
+        if (partner.getEmail() != null) {
+            partnerToUpdate.setEmail(partner.getEmail());
         }
-        if(partnerDTO.getPhoneNumber()!=null) {
-            partnerToUpdate.setPhoneNumber(partnerDTO.getPhoneNumber());
+        if (partner.getPhoneNumber() != null) {
+            partnerToUpdate.setPhoneNumber(partner.getPhoneNumber());
         }
     }
 }

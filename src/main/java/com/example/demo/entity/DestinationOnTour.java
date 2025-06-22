@@ -1,6 +1,9 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 
 
@@ -9,14 +12,8 @@ public class DestinationOnTour {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @ManyToOne
-    @JoinColumn(name = "tour_id")
-    private Tour tour;
-
-    @ManyToOne
-    @JoinColumn(name = "destination_id")
-    private Destination destination;
+    private Long tourId;
+    private Long destinationId;
 
     public DestinationOnTour() {
     }
@@ -29,19 +26,19 @@ public class DestinationOnTour {
         this.id = id;
     }
 
-    public Tour getTour() {
-        return tour;
+    public Long getTourId() {
+        return tourId;
     }
 
-    public void setTour(Tour tour) {
-        this.tour = tour;
+    public void setTourId(Long tourId) {
+        this.tourId = tourId;
     }
 
-    public Destination getDestination() {
-        return destination;
+    public Long getDestinationId() {
+        return destinationId;
     }
 
-    public void setDestination(Destination destination) {
-        this.destination = destination;
+    public void setDestinationId(Long destinationId) {
+        this.destinationId = destinationId;
     }
 }

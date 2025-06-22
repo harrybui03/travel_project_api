@@ -1,6 +1,5 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.dto.DestinationDTO;
 import com.example.demo.entity.Destination;
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.repository.DestinationRepository;
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -25,30 +23,26 @@ public class DestinationServiceImpl implements DestinationService {
     }
 
     @Override
-    public DestinationDTO createDestination(DestinationDTO destinationDTO) {
+    public Destination createDestination(Destination destinationDTO) {
         Destination destination = new Destination();
         BeanUtils.copyProperties(destinationDTO, destination);
-        Destination savedDestination = destinationRepository.save(destination);
-        return convertToDTO(savedDestination);
+        return destinationRepository.save(destination);
     }
 
     @Override
-    public DestinationDTO getDestinationById(Long id) {
+    public Destination getDestinationById(Long id) {
         Destination destination = destinationRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Destination not found with id: " + id));
-        return convertToDTO(destination);
+        return destination;
     }
 
     @Override
-    public List<DestinationDTO> getAllDestinations() {
-        return destinationRepository.findAll()
-                .stream()
-                .map(this::convertToDTO)
-                .collect(Collectors.toList());
+    public List<Destination> getAllDestinations() {
+        return destinationRepository.findAll();
     }
 
     @Override
-    public DestinationDTO updateDestination(Long id, DestinationDTO destinationDTO) {
+    public Destination updateDestination(Long id, Destination destinationDTO) {
         Destination existingDestination = destinationRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Destination not found with id: " + id));
 
@@ -56,7 +50,7 @@ public class DestinationServiceImpl implements DestinationService {
         existingDestination.setLocation(destinationDTO.getLocation());
 
         Destination updatedDestination = destinationRepository.save(existingDestination);
-        return convertToDTO(updatedDestination);
+        return updatedDestination;
     }
 
     @Override
@@ -66,13 +60,13 @@ public class DestinationServiceImpl implements DestinationService {
         destinationRepository.delete(destination);
     }
 
-    private DestinationDTO convertToDTO(Destination destination) {
-        DestinationDTO destinationDTO = new DestinationDTO();
+    private Destination convertToDTO(Destination destination) {
+        Destination destinationDTO = new Destination();
         BeanUtils.copyProperties(destination, destinationDTO);
         return destinationDTO;
     }
 
-    private Destination convertToEntity(DestinationDTO destinationDTO) {
+    private Destination convertToEntity(Destination destinationDTO) {
         Destination destination = new Destination();
         BeanUtils.copyProperties(destinationDTO, destination);
         return destination;

@@ -2,7 +2,6 @@ package com.example.demo.entity;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -20,6 +19,7 @@ public abstract class Member {
     private String email;
     private String phonenumber;
     private String note;
+    private String password;
 
     public Member() {
     }
@@ -88,6 +88,10 @@ public abstract class Member {
         this.username = username;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
     public String getFullname() {
         return fullname;
     }
@@ -96,4 +100,7 @@ public abstract class Member {
         this.fullname = fullname;
     }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

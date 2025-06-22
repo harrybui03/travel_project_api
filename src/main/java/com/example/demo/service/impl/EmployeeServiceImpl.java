@@ -2,8 +2,10 @@ package com.example.demo.service.impl;
 
 
 import com.example.demo.entity.Employee;
+import com.example.demo.entity.Member;
 import com.example.demo.entity.enums.EmployeeRole;
 import com.example.demo.repository.EmployeeRepository;
+import com.example.demo.repository.MemberRepository;
 import com.example.demo.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
+    @Autowired
+    private MemberRepository memberRepository;
 
     @Override
     public Employee addEmployee(Employee employee) {
@@ -59,6 +63,17 @@ public class EmployeeServiceImpl implements EmployeeService {
        updateEmployeeEntity(employeeToUpdate, employee);
         Employee savedEmployee = employeeRepository.save(employeeToUpdate);
         return savedEmployee;
+    }
+
+    public Member authenticate(String email, String password) {
+        Member member = memberRepository.findByEmail(email);
+        if (member == null) {
+            throw new IllegalArgumentException("Member not found");
+        }
+        if (!member.getPassword().equals(password)) {
+            throw new IllegalArgumentException("Invalid password");
+        }
+        return member;
     }
 
 

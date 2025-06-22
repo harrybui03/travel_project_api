@@ -1,8 +1,9 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.*;
-
-import java.util.Date;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 
 @Entity
@@ -11,15 +12,9 @@ public class ServiceOnTour {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Date usedDate;
+    private Long tourId;
 
-    @ManyToOne
-    @JoinColumn(name = "tour_id")
-    private Tour tour;
-
-    @ManyToOne
-    @JoinColumn(name = "service_id")
-    private TourService service;
+    private Long serviceId;
 
     public ServiceOnTour() {
     }
@@ -32,27 +27,20 @@ public class ServiceOnTour {
         this.id = id;
     }
 
-    public TourService getService() {
-        return service;
+
+    public Long getServiceId() {
+        return serviceId;
     }
 
-    public void setService(TourService service) {
-        this.service = service;
+    public void setServiceId(Long serviceId) {
+        this.serviceId = serviceId;
     }
 
-    public Tour getTour() {
-        return tour;
+    public Long getTourId() {
+        return tourId;
     }
 
-    public void setTour(Tour tour) {
-        this.tour = tour;
-    }
-
-    public Date getUsedDate() {
-        return usedDate;
-    }
-
-    public void setUsedDate(Date usedDate) {
-        this.usedDate = usedDate;
+    public void setTourId(Long tourId) {
+        this.tourId = tourId;
     }
 }
